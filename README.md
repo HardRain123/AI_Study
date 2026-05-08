@@ -1,2 +1,2 @@
-# Agent-
-记录Agent学习过程
+# AI_STUDY
+记录学习AI的过程
