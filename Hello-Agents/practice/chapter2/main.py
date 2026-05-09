@@ -155,7 +155,9 @@ if __name__ == "__main__":
         user_input = input("You: ")
         save_user_info(user_input)
         if user_input.lower() in ["quit", "exit", "bye"]:
-            print("Therapist: Goodbye. It was nice talking to you.")
+            print(
+                f"Therapist: Goodbye {person_info['name']}. It was nice talking to you."
+            )
             break
         response = respond(user_input)
         print(f"Therapist: {response}")
