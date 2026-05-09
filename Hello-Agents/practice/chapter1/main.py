@@ -9,8 +9,8 @@ import tools.tools as tools
 API_KEY = ""
 BASE_URL = "https://api.deepseek.com"
 MODEL_ID = "deepseek-reasoner"
-TAVILY_API_KEY = "YOUR_Tavily_KEY"
-os.environ["TAVILY_API_KEY"] = "YOUR_TAVILY_API_KEY"
+TAVILY_API_KEY = ""
+os.environ["TAVILY_API_KEY"] = ""
 
 llm = open_ai_client.OpenAICompatibleClient(
     model=MODEL_ID, api_key=API_KEY, base_url=BASE_URL
