@@ -1,34 +1,52 @@
 from dotenv import load_dotenv
 from llm_client.llm_client import HelloAgentsLLM
 from tools.tool_executor import ToolExecutor
-from tools.search import search
+
+# from tools.search import search
 from agent.re_act_agent import ReActAgent
 from agent.plan_and_solve_agent import PlanAndSolveAgent
+from agent.reflection_agent import ReflectionAgent
 
 
 # 加载 .env 文件中的环境变量
 load_dotenv()
 
-# --- PlanAndSolve使用示例 ---
+# ---ReflectionAgent使用示例---
 if __name__ == "__main__":
     try:
         # 1. 初始化LLM客户端
         llmClient = HelloAgentsLLM()
 
-        # 2. 初始化工具执行器并注册工具
-        toolExecutor = ToolExecutor()
-        search_description = "一个网页搜索引擎。当你需要回答关于时事、事实以及在你的知识库中找不到的信息时，应使用此工具。"
-        toolExecutor.registerTool("Search", search_description, search)
+        # 2. 创建Reflection智能体实例
+        agent = ReflectionAgent(llm_client=llmClient)
 
-        # 3. 创建PlanAndSolve智能体实例
-        agent = PlanAndSolveAgent(llm_client=llmClient)
-
-        # 4. 运行智能体来回答一个问题
-        question = "一个水果店周一卖出了15个苹果。周二卖出的苹果数量是周一的两倍。周三卖出的数量比周二少了5个。请问这三天总共卖出了多少个苹果？"
-        agent.run(question)
+        # 3. 运行智能体来完成一个编程任务
+        task = "编写一个Python函数，找出1到n之间所有的素数"
+        agent.run(task)
 
     except ValueError as e:
         print(e)
+
+# --- PlanAndSolve使用示例 ---
+# if __name__ == "__main__":
+#     try:
+#         # 1. 初始化LLM客户端
+#         llmClient = HelloAgentsLLM()
+
+#         # 2. 初始化工具执行器并注册工具
+#         toolExecutor = ToolExecutor()
+#         search_description = "一个网页搜索引擎。当你需要回答关于时事、事实以及在你的知识库中找不到的信息时，应使用此工具。"
+#         toolExecutor.registerTool("Search", search_description, search)
+
+#         # 3. 创建PlanAndSolve智能体实例
+#         agent = PlanAndSolveAgent(llm_client=llmClient)
+
+#         # 4. 运行智能体来回答一个问题
+#         question = "一个水果店周一卖出了15个苹果。周二卖出的苹果数量是周一的两倍。周三卖出的数量比周二少了5个。请问这三天总共卖出了多少个苹果？"
+#         agent.run(question)
+
+#     except ValueError as e:
+#         print(e)
 
 # --- ReAct使用示例 ---
 # if __name__ == "__main__":
