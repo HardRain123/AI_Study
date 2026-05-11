@@ -72,16 +72,22 @@ class ReActAgent:
                 continue
 
             print(f"🎬 行动: {tool_name}[{tool_input}]")
+            try:
+                tool_function = self.tool_executor.getTool(tool_name)
+                if not tool_function:
+                    observation = f"错误:未找到名为 '{tool_name}' 的工具。"
+                else:
+                    observation = tool_function(tool_input)  # 调用真实工具
+            except Exception as e:
+                observation = (
+                    f"错误:调用工具 '{tool_name}'，入参 '{tool_input}' 时发生异常: {e}"
+                )
 
-            tool_function = self.tool_executor.getTool(tool_name)
-            if not tool_function:
-                observation = f"错误:未找到名为 '{tool_name}' 的工具。"
-            else:
-                observation = tool_function(tool_input)  # 调用真实工具
-                # (这段逻辑紧随工具调用之后，在 while 循环的末尾)
+            # (这段逻辑紧随工具调用之后，在 while 循环的末尾)
             print(f"👀 观察: {observation}")
 
             # 将本轮的Action和Observation添加到历史记录中
+            self.history.append(f"Thought: {thought}")
             self.history.append(f"Action: {action}")
             self.history.append(f"Observation: {observation}")
 

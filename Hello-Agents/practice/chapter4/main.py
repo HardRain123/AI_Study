@@ -2,7 +2,7 @@ from dotenv import load_dotenv
 from llm_client.llm_client import HelloAgentsLLM
 from tools.tool_executor import ToolExecutor
 
-# from tools.search import search
+from tools.search import search
 from agent.re_act_agent import ReActAgent
 from agent.plan_and_solve_agent import PlanAndSolveAgent
 from agent.reflection_agent import ReflectionAgent
@@ -12,20 +12,20 @@ from agent.reflection_agent import ReflectionAgent
 load_dotenv()
 
 # ---ReflectionAgent使用示例---
-if __name__ == "__main__":
-    try:
-        # 1. 初始化LLM客户端
-        llmClient = HelloAgentsLLM()
+# if __name__ == "__main__":
+#     try:
+#         # 1. 初始化LLM客户端
+#         llmClient = HelloAgentsLLM()
 
-        # 2. 创建Reflection智能体实例
-        agent = ReflectionAgent(llm_client=llmClient)
+#         # 2. 创建Reflection智能体实例
+#         agent = ReflectionAgent(llm_client=llmClient)
 
-        # 3. 运行智能体来完成一个编程任务
-        task = "编写一个Python函数，找出1到n之间所有的素数"
-        agent.run(task)
+#         # 3. 运行智能体来完成一个编程任务
+#         task = "编写一个Python函数，找出1到n之间所有的素数"
+#         agent.run(task)
 
-    except ValueError as e:
-        print(e)
+#     except ValueError as e:
+#         print(e)
 
 # --- PlanAndSolve使用示例 ---
 # if __name__ == "__main__":
@@ -49,25 +49,25 @@ if __name__ == "__main__":
 #         print(e)
 
 # --- ReAct使用示例 ---
-# if __name__ == "__main__":
-#     try:
-#         # 1. 初始化LLM客户端
-#         llmClient = HelloAgentsLLM()
+if __name__ == "__main__":
+    try:
+        # 1. 初始化LLM客户端
+        llmClient = HelloAgentsLLM()
 
-#         # 2. 初始化工具执行器并注册工具
-#         toolExecutor = ToolExecutor()
-#         search_description = "一个网页搜索引擎。当你需要回答关于时事、事实以及在你的知识库中找不到的信息时，应使用此工具。"
-#         toolExecutor.registerTool("Search", search_description, search)
+        # 2. 初始化工具执行器并注册工具
+        toolExecutor = ToolExecutor()
+        search_description = "一个网页搜索引擎。当你需要回答关于时事、事实以及在你的知识库中找不到的信息时，应使用此工具。"
+        toolExecutor.registerTool("Search", search_description, search)
 
-#         # 3. 创建ReAct智能体实例
-#         agent = ReActAgent(llm_client=llmClient, tool_executor=toolExecutor)
+        # 3. 创建ReAct智能体实例
+        agent = ReActAgent(llm_client=llmClient, tool_executor=toolExecutor)
 
-#         # 4. 运行智能体来回答一个问题
-#         question = "华为手机最新型号是什么？"
-#         agent.run(question)
+        # 4. 运行智能体来回答一个问题
+        question = "华为手机最新型号是什么？"
+        agent.run(question)
 
-#     except ValueError as e:
-#         print(e)
+    except ValueError as e:
+        print(e)
 
 
 # --- 客户端使用示例 ---
