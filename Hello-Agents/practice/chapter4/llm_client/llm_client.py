@@ -1,6 +1,6 @@
 import os
 from openai import OpenAI
-from dotenv import load_dotenv
+from dotenv import load_dotenv, find_dotenv
 from typing import List, Dict
 
 
@@ -17,6 +17,7 @@ class HelloAgentsLLM:
         baseUrl: str = None,
         timeout: int = None,
     ):
+        load_dotenv()  # 加载环境变量
         """
         初始化客户端。优先使用传入参数，如果未提供，则从环境变量加载。
         """

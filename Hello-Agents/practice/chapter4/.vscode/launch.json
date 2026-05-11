@@ -1,0 +1,10 @@
+{
+  "name": "Debug current file (venv)",
+  "type": "python",
+  "request": "launch",
+  "program": "${file}",
+  "cwd": "${fileDirname}",   // ← 关键
+  "console": "integratedTerminal",
+  "justMyCode": true,
+  "python": "${workspaceFolder}/.venv/Scripts/python.exe"
+}

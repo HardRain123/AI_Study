@@ -87,7 +87,7 @@ class ReActAgent:
             print(f"👀 观察: {observation}")
 
             # 将本轮的Action和Observation添加到历史记录中
-            self.history.append(f"Thought: {thought}")
+            # self.history.append(f"Thought: {thought}")
             self.history.append(f"Action: {action}")
             self.history.append(f"Observation: {observation}")
 
